@@ -61,8 +61,8 @@
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-pink-200/70 px-4 py-3 shadow-xs">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <!-- Large Avatar Badge -->
-        <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 via-rose-500 to-amber-400 p-0.5 shadow-md shrink-0 avatar-bounce">
+        <!-- Large Avatar Badge with rounded-xl -->
+        <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 via-rose-500 to-amber-400 p-0.5 shadow-md shrink-0 avatar-bounce overflow-visible">
           <img id="userAvatarHeader" src="avatar.jpg" alt="John Avatar" class="w-full h-full object-cover rounded-xl">
           <span class="absolute -bottom-1 -right-1 text-xs bg-white rounded-full px-1 shadow border border-pink-200">🎒</span>
         </div>
@@ -85,7 +85,7 @@
   <!-- Main Content Container -->
   <main class="max-w-md mx-auto px-4 pt-3 space-y-4">
 
-    <!-- Mission Target Card (Pink/Magenta Hero with Large Picture Display) -->
+    <!-- Mission Target Card -->
     <div class="bg-gradient-to-br from-pink-600 via-rose-500 to-fuchsia-600 rounded-3xl p-4 text-white shadow-lg shadow-pink-500/20 relative overflow-hidden border border-pink-400/40">
       <div class="absolute -right-8 -bottom-8 text-9xl opacity-15 pointer-events-none">🗺️</div>
       
@@ -101,7 +101,7 @@
       <!-- Large Hero Avatar and Title Banner -->
       <div class="flex items-center space-x-3.5 mb-3">
         <div class="relative w-20 h-20 rounded-2xl bg-white p-1 shadow-lg shrink-0 border-2 border-pink-300">
-          <img id="userAvatarHeader" src="avatar.jpg" alt="John Avatar" class="w-full h-full object-cover rounded-xl">
+          <img id="userAvatarHero" src="avatar.jpg" alt="John Avatar" class="w-full h-full object-cover rounded-xl">
           <div class="absolute -top-2 -right-2 bg-amber-400 text-slate-900 text-[10px] font-black px-1.5 py-0.5 rounded-md shadow border border-white">
             EXPLORER
           </div>
@@ -230,6 +230,36 @@
           </label>
         </div>
       </div>
+
+      <!-- Malaysia Local Survival Phrases -->
+      <div class="bg-white rounded-2xl p-4 border border-pink-200/80 shadow-xs space-y-3">
+        <div class="flex items-center justify-between border-b border-pink-100 pb-2">
+          <span class="text-xs font-black text-slate-800 flex items-center space-x-1">
+            <span>🗣️</span>
+            <span>槟城 / 吉隆坡 机场常用沟通卡 (点按放大)</span>
+          </span>
+          <span class="text-[10px] text-pink-500 font-bold">BM / EN</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div onclick="showPhraseModal('Di mana tempat tuntut bagasi?', '请问行李提取处在哪里？', 'Where is the baggage claim?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">行李提取处在哪？</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">Tuntut bagasi / Luggage</div>
+          </div>
+          <div onclick="showPhraseModal('Di mana tandas yang terdekat?', '请问最近的洗手间在哪里？', 'Where is the nearest restroom?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">最近的厕所在哪？</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">Tandas / Restroom</div>
+          </div>
+          <div onclick="showPhraseModal('Bagasi saya hanya sampai ke KLIA sahaja kan?', '请问我的行李是只托运到吉隆坡对吗？', 'Is my luggage checked to KUL only?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">行李只寄到吉隆坡对吗？</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">Check-in to KUL only?</div>
+          </div>
+          <div onclick="showPhraseModal('Pintu perlepasan ini untuk penerbangan mana?', '请问这个登机口是哪趟航班？', 'Which flight is this gate for?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">确认登机口</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">Pintu perlepasan / Gate</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ==================== TAB 2: KLIA 1 TRANSFER ==================== -->
@@ -294,6 +324,36 @@
               <p class="text-pink-600 font-medium">如果登机门是 **C 门（卫星厅 Satellite）**，乘搭接驳巴士（Shuttle Bus）或航站列车过去。21:00 (MYT) 前到达登机口！</p>
             </div>
           </label>
+        </div>
+      </div>
+
+      <!-- KLIA 1 Ground Helper Phrases -->
+      <div class="bg-white rounded-2xl p-4 border border-pink-200/80 shadow-xs space-y-3">
+        <div class="flex items-center justify-between border-b border-pink-100 pb-2">
+          <span class="text-xs font-black text-slate-800 flex items-center space-x-1">
+            <span>🗣️</span>
+            <span>KLIA 1 问路求助卡 (出示给地勤)</span>
+          </span>
+          <span class="text-[10px] text-pink-500 font-bold">BM / EN</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div onclick="showPhraseModal('Di mana kaunter daftar masuk Etihad Airways?', '请问阿提哈德航空值机柜台在哪里？', 'Where is the Etihad Airways check-in counter?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">Etihad 柜台在哪？</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">Kaunter Etihad (Level 5)</div>
+          </div>
+          <div onclick="showPhraseModal('Macam mana nak naik ke Balai Perlepasan Tingkat 5?', '请问怎么上 5 楼出发大厅？', 'How do I go to Level 5 Departures?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">怎么上 5 楼出发厅？</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">Lif ke Tingkat 5 / Level 5</div>
+          </div>
+          <div onclick="showPhraseModal('Bagasi saya daftar terus ke Madrid, betul?', '请问我的行李是直接托运到马德里对吧？', 'My luggage goes straight to Madrid, right?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">确认行李直飞马德里</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">Luggage straight to Madrid</div>
+          </div>
+          <div onclick="showPhraseModal('Di mana bas perantara ke Bangunan Satelit C?', '请问去卫星厅 C 门的接驳巴士在哪里乘搭？', 'Where is the shuttle bus to Satellite Gates C?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">去 C 门卫星厅怎么坐车？</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">Shuttle Bus to Gates C</div>
+          </div>
         </div>
       </div>
     </div>
@@ -433,6 +493,36 @@
           </label>
         </div>
       </div>
+
+      <!-- Abu Dhabi Arabic / English Phrases -->
+      <div class="bg-white rounded-2xl p-4 border border-pink-200/80 shadow-xs space-y-3">
+        <div class="flex items-center justify-between border-b border-pink-100 pb-2">
+          <span class="text-xs font-black text-slate-800 flex items-center space-x-1">
+            <span>🗣️</span>
+            <span>阿布扎比 (AUH) 转机问路卡 (阿拉伯文 + 英文)</span>
+          </span>
+          <span class="text-[10px] text-purple-600 font-bold">AR / EN</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div onclick="showPhraseModal('أين بوابة رحلات العبور؟', '请问国际转机/安检通道在哪里？', 'Where is the Flight Connections gate?')" class="p-2.5 bg-purple-50/60 hover:bg-purple-100/70 rounded-xl border border-purple-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">转机通道在哪里？</div>
+            <div class="text-[11px] text-purple-700 font-mono mt-0.5">Flight Connections</div>
+          </div>
+          <div onclick="showPhraseModal('أين بوابة الصعود للطائرة EY101؟', '请问飞往马德里的 EY101 登机口在哪？', 'Where is Gate for EY101 to Madrid?')" class="p-2.5 bg-purple-50/60 hover:bg-purple-100/70 rounded-xl border border-purple-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">EY101 登机口在哪？</div>
+            <div class="text-[11px] text-purple-700 font-mono mt-0.5">Gate for EY101 Madrid</div>
+          </div>
+          <div onclick="showPhraseModal('أحتاج إلى مساعدة طبية عاجلة', '我身体不舒服，需要紧急医疗帮助', 'I need urgent medical help')" class="p-2.5 bg-rose-50/80 hover:bg-rose-100/80 rounded-xl border border-rose-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-rose-900">我需要医疗救助</div>
+            <div class="text-[11px] text-rose-700 font-mono mt-0.5">Urgent medical help</div>
+          </div>
+          <div onclick="showPhraseModal('من فضلك اتصل بالشرطة / الأمن', '请帮我叫机场安保或报警', 'Please call police / airport security')" class="p-2.5 bg-purple-50/60 hover:bg-purple-100/70 rounded-xl border border-purple-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">请帮我叫安保/警察</div>
+            <div class="text-[11px] text-purple-700 font-mono mt-0.5">Call Security / Police</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ==================== TAB 5: MADRID ARRIVAL & UBER ==================== -->
@@ -512,6 +602,36 @@
           <button onclick="openTaxiCardModal()" class="w-full mt-2 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 rounded-lg text-xs transition flex items-center justify-center space-x-1 shadow-sm">
             <span>🚕 点此直接全屏出示给司机看</span>
           </button>
+        </div>
+      </div>
+
+      <!-- Spain Spanish Survival Cards -->
+      <div class="bg-white rounded-2xl p-4 border border-pink-200/80 shadow-xs space-y-3">
+        <div class="flex items-center justify-between border-b border-pink-100 pb-2">
+          <span class="text-xs font-black text-slate-800 flex items-center space-x-1">
+            <span>🗣️</span>
+            <span>马德里机场西语常用卡 (点按放大出示)</span>
+          </span>
+          <span class="text-[10px] text-pink-500 font-bold">ES / 西班牙语</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div onclick="showPhraseModal('¿Dónde está la salida?', '请问出口在哪里？', 'Dong-de es-ta la sa-li-da?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">出口在哪里？</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">¿Dónde está la salida?</div>
+          </div>
+          <div onclick="showPhraseModal('¿Dónde recojo el equipaje?', '请问行李提取处在哪里？', 'Dong-de re-co-ho el e-ki-pa-he?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">哪里拿行李？</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">¿Dónde el equipaje?</div>
+          </div>
+          <div onclick="showPhraseModal('¿Dónde está el punto de recogida de Uber en Parking P4?', '请问Uber网约车在P4停车楼的上车点在哪？', 'Parking P4 Módulo D 4ª planta')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">Uber上车点在哪？</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">Punto Uber P4 Módulo D</div>
+          </div>
+          <div onclick="showPhraseModal('No hablo español, ¿puede ayudarme en inglés por favor?', '我不会说西班牙语，请问能讲英语帮帮我吗？', 'No ab-lo es-pa-nyol')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-slate-900">我不会说西语</div>
+            <div class="text-[11px] text-pink-700 italic mt-0.5">No hablo español</div>
+          </div>
         </div>
       </div>
     </div>
@@ -705,50 +825,47 @@
           <p>3. 大使馆将加急开具**紧急旅行证件 (Sijil Perakuan Cemas)** 供回国使用。</p>
         </div>
       </div>
+
+      <!-- Spanish Emergency Phrases -->
+      <div class="bg-white rounded-2xl p-4 border border-pink-200/80 shadow-xs space-y-3">
+        <div class="flex items-center justify-between border-b border-pink-100 pb-2">
+          <span class="text-xs font-black text-slate-800 flex items-center space-x-1">
+            <span>🗣️</span>
+            <span>西班牙紧急报警与求救常用卡 (点按放大出示)</span>
+          </span>
+          <span class="text-[10px] text-rose-600 font-bold">ES / 报警急用</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div onclick="showPhraseModal('He perdido mi pasaporte. Necesito poner una denuncia.', '我丢失了护照，需要报警立案。', 'He per-di-do mi pa-sa-por-te')" class="p-2.5 bg-rose-50/70 hover:bg-rose-100 rounded-xl border border-rose-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-rose-950">我丢了护照要报警</div>
+            <div class="text-[11px] text-rose-700 italic mt-0.5">He perdido mi pasaporte</div>
+          </div>
+          <div onclick="showPhraseModal('¿Dónde está la comisaría de policía más cercana?', '请问最近的警察局在哪里？', '¿Dónde está la comisaría?')" class="p-2.5 bg-rose-50/70 hover:bg-rose-100 rounded-xl border border-rose-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-rose-950">最近的警察局在哪？</div>
+            <div class="text-[11px] text-rose-700 italic mt-0.5">¿Dónde está la comisaría?</div>
+          </div>
+          <div onclick="showPhraseModal('Necesito asistencia médica urgente por favor.', '我需要紧急医疗救助。', 'A-sis-ten-cia me-di-ca')" class="p-2.5 bg-rose-50/70 hover:bg-rose-100 rounded-xl border border-rose-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-rose-950">我需要看急诊医生</div>
+            <div class="text-[11px] text-rose-700 italic mt-0.5">Asistencia médica urgente</div>
+          </div>
+          <div onclick="showPhraseModal('Por favor llame a la Embajada de Malasia.', '请帮我联系马来西亚大使馆。', 'Lla-me a la Em-ba-ja-da')" class="p-2.5 bg-rose-50/70 hover:bg-rose-100 rounded-xl border border-rose-200 cursor-pointer transition active:scale-95">
+            <div class="font-bold text-rose-950">请联系大马使馆</div>
+            <div class="text-[11px] text-rose-700 italic mt-0.5">Embajada de Malasia</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Essential Survival Phrases Card -->
-    <div class="bg-white rounded-2xl p-4 border border-pink-200/80 shadow-xs space-y-3">
-      <div class="flex items-center justify-between border-b border-pink-100 pb-2">
-        <span class="text-xs font-black text-slate-800 flex items-center space-x-1">
-          <span>🗣️</span>
-          <span>常用求助卡片 (点击放大直接出示)</span>
-        </span>
-        <span class="text-[10px] text-pink-500 font-bold">双语对照</span>
-      </div>
-
-      <div class="grid grid-cols-2 gap-2 text-xs">
-        <div onclick="showPhraseModal('¿Dónde está la salida?', '请问出口在哪里？', 'Dong-de es-ta la sa-li-da?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
-          <div class="font-bold text-slate-900">出口在哪里？</div>
-          <div class="text-[11px] text-pink-700 italic mt-0.5">¿Dónde está la salida?</div>
-        </div>
-        <div onclick="showPhraseModal('¿Dónde recojo el equipaje?', '请问行李提取处在哪里？', 'Dong-de re-co-ho el e-ki-pa-he?')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
-          <div class="font-bold text-slate-900">哪里拿行李？</div>
-          <div class="text-[11px] text-pink-700 italic mt-0.5">¿Dónde el equipaje?</div>
-        </div>
-        <div onclick="showPhraseModal('¿Dónde está el punto de recogida de Uber?', '请问Uber网约车上车点在哪里？', 'Uber / VTC Parking P4')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
-          <div class="font-bold text-slate-900">Uber上车点在哪？</div>
-          <div class="text-[11px] text-pink-700 italic mt-0.5">¿Punto de Uber P4?</div>
-        </div>
-        <div onclick="showPhraseModal('No hablo español, solo hablo inglés.', '我不会西语，可以说英语吗？', 'No ab-lo es-pa-nyol')" class="p-2.5 bg-pink-50/50 hover:bg-pink-100/70 rounded-xl border border-pink-200 cursor-pointer transition active:scale-95">
-          <div class="font-bold text-slate-900">我不会说西班牙语</div>
-          <div class="text-[11px] text-pink-700 italic mt-0.5">No hablo español</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dynamic Country Emergency Dial Card (Updates with active tab) -->
+    <!-- Clean Dynamic Country Emergency Dial Card (Updates with active tab) -->
     <div id="dynamicEmergencyBar" class="bg-gradient-to-r from-slate-900 via-pink-950 to-slate-900 text-white rounded-2xl p-4 shadow-sm flex items-center justify-between border border-pink-500/20">
       <div>
-        <div id="emergencyBarRegion" class="text-[11px] text-pink-300 font-bold uppercase tracking-wider">🇪🇸 西班牙当前紧急电话</div>
-        <div id="emergencyBarNumber" class="text-xl font-mono font-black text-amber-300 tracking-wider">112 (全欧通用免费)</div>
+        <div id="emergencyBarRegion" class="text-[11px] text-pink-300 font-bold uppercase tracking-wider">🇲🇾 马来西亚当前紧急求助</div>
+        <div id="emergencyBarNumber" class="text-xl font-mono font-black text-amber-300 tracking-wider">999 (大马警察 / 救护车)</div>
       </div>
-      <div class="flex items-center space-x-1.5">
-        <button id="emergencyPhraseBtn" onclick="openLanguageHelperModal()" class="bg-white/20 hover:bg-white/30 text-white px-2.5 py-2 rounded-xl text-xs font-bold transition">
-          字卡
-        </button>
-        <a id="emergencyCallBtn" href="tel:112" class="bg-pink-500 hover:bg-pink-600 text-white px-3.5 py-2 rounded-xl text-xs font-black flex items-center space-x-1 transition active:scale-95 shadow">
-          <span>📞 直拨</span>
+      <div>
+        <a id="emergencyCallBtn" href="tel:999" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2.5 rounded-xl text-xs font-black flex items-center space-x-1.5 transition active:scale-95 shadow">
+          <span>📞 直拨求助</span>
         </a>
       </div>
     </div>
@@ -794,18 +911,18 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL 2: PHRASE DIALOG ==================== -->
+  <!-- ==================== MODAL 2: UNIFIED PHRASE DIALOG ==================== -->
   <div id="phraseModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl relative text-center space-y-4 border-2 border-pink-300">
       <button onclick="closePhraseModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-pink-100 text-pink-700 font-bold hover:bg-pink-200 transition">
         ✕
       </button>
 
-      <span class="text-xs uppercase font-extrabold text-pink-600 tracking-wider">直接拿给工作人员看</span>
+      <span class="text-xs uppercase font-extrabold text-pink-600 tracking-wider">直接出示给工作人员看</span>
 
       <div class="bg-pink-50 border-2 border-pink-200 rounded-2xl p-5">
-        <p id="phraseSpanish" class="text-2xl font-black text-slate-900 leading-snug"></p>
-        <p id="phrasePinyin" class="text-xs text-pink-500 mt-2 font-mono italic"></p>
+        <p id="phraseTargetLang" class="text-2xl font-black text-slate-900 leading-snug"></p>
+        <p id="phraseSubtext" class="text-xs text-pink-500 mt-2 font-mono italic"></p>
       </div>
 
       <p id="phraseChinese" class="text-sm font-bold text-slate-700"></p>
@@ -816,41 +933,7 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL 3: ARABIC / LOCAL EMERGENCY HELPER ==================== -->
-  <div id="langHelperModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl relative text-center space-y-4 border-2 border-pink-300">
-      <button onclick="closeLanguageHelperModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-pink-100 text-pink-700 font-bold hover:bg-pink-200 transition">
-        ✕
-      </button>
-
-      <div id="langHelperTitle" class="text-xs font-black text-pink-600 uppercase tracking-wider">阿布扎比 (UAE) 紧急问路字卡</div>
-
-      <div class="bg-pink-50/80 p-4 rounded-2xl border border-pink-200 text-left space-y-2 text-xs">
-        <div class="border-b border-pink-100 pb-2">
-          <p class="font-bold text-slate-900">1. 我需要紧急医疗帮助</p>
-          <p class="text-sm font-black text-pink-900 mt-0.5" dir="rtl">أحتاج إلى مساعدة طبية عاجلة</p>
-          <p class="text-[10px] text-slate-500 italic">I need urgent medical help</p>
-        </div>
-        <div class="border-b border-pink-100 pb-2">
-          <p class="font-bold text-slate-900">2. 请帮我报警</p>
-          <p class="text-sm font-black text-pink-900 mt-0.5" dir="rtl">من فضلك اتصل بالشرطة</p>
-          <p class="text-[10px] text-slate-500 italic">Please call the police</p>
-        </div>
-        <div>
-          <p class="font-bold text-slate-900">3. 转机安检口在哪里？</p>
-          <p class="text-sm font-black text-pink-900 mt-0.5" dir="rtl">أين بوابة رحلات العبور؟</p>
-          <p class="text-[10px] text-slate-500 italic">Where is flight connections?</p>
-        </div>
-      </div>
-
-      <button onclick="closeLanguageHelperModal()" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs">
-        收起字卡
-      </button>
-    </div>
-  </div>
-
   <script>
-    // LocalStorage Key for Checkbox State
     const STORAGE_KEY = 'john_the_explorer_travel_state_v2';
     let savedState = {};
 
@@ -859,9 +942,6 @@
     } catch(e) {
       savedState = {};
     }
-
-    // Active Tab Tracking for Emergency Footer
-    let currentActiveTab = 1;
 
     document.addEventListener('DOMContentLoaded', () => {
       const checkboxes = document.querySelectorAll('.todo-check');
@@ -884,7 +964,6 @@
       updateProgress();
       updateEmergencyBar(1);
 
-      // Reset button
       document.getElementById('resetBtn').addEventListener('click', () => {
         if (window.confirm("John, 确定要重新开始重置所有勾选吗？")) {
           localStorage.removeItem(STORAGE_KEY);
@@ -940,9 +1019,8 @@
       }
     }
 
-    // 8-Tab Switcher
+    // Tab Switcher
     function switchTab(index) {
-      currentActiveTab = index;
       for (let i = 1; i <= 8; i++) {
         const panel = document.getElementById('tab-content-' + i);
         const btn = document.getElementById('tab-btn-' + i);
@@ -966,13 +1044,13 @@
       updateEmergencyBar(index);
     }
 
-    // Country-Aware Bottom Emergency Bar
+    // Context-Aware Emergency Bottom Bar
     function updateEmergencyBar(tabIndex) {
       const regionEl = document.getElementById('emergencyBarRegion');
       const numberEl = document.getElementById('emergencyBarNumber');
       const callBtn = document.getElementById('emergencyCallBtn');
 
-      if (tabIndex === 1 || tabIndex === 2 || tabIndex === 3) {
+      if (tabIndex <= 3) {
         // Malaysia
         regionEl.innerText = "🇲🇾 马来西亚当前紧急求助";
         numberEl.innerText = "999 (大马警察 / 救护车)";
@@ -983,7 +1061,7 @@
         numberEl.innerText = "999 (警察) / 998 (救护车)";
         callBtn.href = "tel:999";
       } else {
-        // Spain (Madrid / Barcelona)
+        // Spain
         regionEl.innerText = "🇪🇸 西班牙当前紧急电话";
         numberEl.innerText = "112 (全欧通用免费直拨)";
         callBtn.href = "tel:112";
@@ -1003,10 +1081,10 @@
       modal.classList.remove('flex');
     }
 
-    function showPhraseModal(spanish, chinese, pinyin) {
-      document.getElementById('phraseSpanish').innerText = spanish;
+    function showPhraseModal(foreignText, chinese, subtext) {
+      document.getElementById('phraseTargetLang').innerText = foreignText;
       document.getElementById('phraseChinese').innerText = chinese;
-      document.getElementById('phrasePinyin').innerText = pinyin || '';
+      document.getElementById('phraseSubtext').innerText = subtext || '';
       const modal = document.getElementById('phraseModal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -1014,26 +1092,6 @@
 
     function closePhraseModal() {
       const modal = document.getElementById('phraseModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    function openLanguageHelperModal() {
-      const modal = document.getElementById('langHelperModal');
-      const title = document.getElementById('langHelperTitle');
-      if (currentActiveTab === 4) {
-        title.innerText = "🇦🇪 阿布扎比 (AUH) 紧急阿拉伯语字卡";
-      } else if (currentActiveTab <= 3) {
-        title.innerText = "🇲🇾 马来西亚紧急问路指引";
-      } else {
-        title.innerText = "🇪🇸 西班牙紧急救援西语指引";
-      }
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeLanguageHelperModal() {
-      const modal = document.getElementById('langHelperModal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
     }
