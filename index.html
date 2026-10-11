@@ -3,26 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>🇪🇸 John The Explorer通关指南 | 见老婆专线</title>
+  <title>🎒 朵拉西班牙大探险 | 见老婆终极任务</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Zilla+Slab:wght@700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            dora: ['"Zilla Slab"', 'cursive', 'sans-serif']
           },
           colors: {
-            brand: {
-              50: '#fff7ed',
-              100: '#ffedd5',
-              500: '#f97316',
-              600: '#ea580c',
-              700: '#c2410c',
+            dora: {
+              pink: '#ec4899',       // Dora 经典粉红
+              darkpink: '#db2777',
+              purple: '#8b5cf6',     // 紫色小书包 Backpack
+              darkpurple: '#7c3aed',
+              yellow: '#facc15',     // 地图黄色 Map Yellow
+              orange: '#f97316',     // 探险橙
+              blue: '#0284c7',       // 蓝蓝天空
+              green: '#10b981'       // 探险草地绿
             }
           }
         }
@@ -30,566 +34,562 @@
     }
   </script>
   <style>
-    /* iOS Momentum Scrolling & safe area */
     body {
       -webkit-tap-highlight-color: transparent;
       padding-bottom: env(safe-area-inset-bottom, 20px);
     }
-    .hide-scrollbar::-webkit-scrollbar {
-      display: none;
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
     }
-    .hide-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    /* Pulse glow */
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 0.8; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(1.08); }
-    }
-    .glow-effect {
-      animation: pulse-glow 3s infinite ease-in-out;
-    }
+    .bounce-dora { animation: bounce-slow 2s infinite ease-in-out; }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased selection:bg-orange-500 selection:text-white pb-24">
+<body class="bg-amber-50/60 text-slate-800 antialiased selection:bg-pink-500 selection:text-white pb-32">
 
-  <!-- Top App Bar -->
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 py-3 shadow-xs">
+  <!-- ==================== TOP NAV BAR ==================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-pink-200 px-4 py-2.5 shadow-sm">
     <div class="max-w-md mx-auto flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <span class="text-2xl">✈️</span>
+      <div class="flex items-center space-x-2.5">
+        <!-- Dora Avatar with Backpack Badge -->
+        <div class="relative">
+          <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-pink-500 shadow-md bg-pink-100 flex items-center justify-center">
+            <!-- 替换同目录下的 avatar.jpg 即可完美呈现 -->
+            <img src="avatar.jpg" alt="Dora" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'">
+          </div>
+          <span class="absolute -bottom-1 -right-1 text-xs bg-purple-600 text-white rounded-full p-0.5 border border-white" title="Backpack">🎒</span>
+        </div>
         <div>
-          <h1 class="text-base font-bold text-slate-900 leading-tight">老公开挂闯关指南</h1>
-          <p class="text-xs text-slate-500 font-medium">PEN ➔ KUL ➔ AUH ➔ MAD</p>
+          <div class="flex items-center space-x-1">
+            <h1 class="text-sm font-extrabold text-slate-900 leading-tight">朵拉西班牙大探险</h1>
+            <span class="text-[10px] bg-pink-500 text-white font-bold px-1.5 py-0.2 rounded-full">¡Vámonos!</span>
+          </div>
+          <p class="text-[11px] text-purple-700 font-bold">PEN ➔ KUL ➔ AUH ➔ MAD</p>
         </div>
       </div>
-      <div class="flex items-center space-x-2">
-        <button id="resetBtn" title="重置勾选" class="text-xs text-slate-500 bg-slate-100 hover:bg-slate-200 px-2.5 py-1.5 rounded-full font-medium transition">
-          重置进度
-        </button>
-      </div>
+      <button id="resetBtn" class="text-[11px] text-pink-700 bg-pink-50 hover:bg-pink-100 border border-pink-200 px-2.5 py-1 rounded-full font-bold transition">
+        重置关卡
+      </button>
     </div>
   </header>
 
-  <!-- Main Content Container -->
-  <main class="max-w-md mx-auto px-4 pt-3 space-y-4">
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="max-w-md mx-auto px-4 pt-3 space-y-3.5">
 
-    <!-- Mission Target Card -->
-    <div class="bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500 rounded-2xl p-4 text-white shadow-lg relative overflow-hidden">
-      <div class="absolute -right-4 -bottom-4 text-8xl opacity-15 pointer-events-none">👰‍♀️</div>
+    <!-- Mission Target: Map & Wife Reunion -->
+    <div class="bg-gradient-to-br from-pink-500 via-rose-500 to-purple-600 rounded-3xl p-4 text-white shadow-lg relative overflow-hidden border-2 border-white">
+      <div class="absolute -right-3 -bottom-3 text-7xl opacity-20 pointer-events-none">🗺️</div>
       <div class="flex items-center justify-between mb-2">
-        <span class="px-2.5 py-0.5 rounded-full bg-white/20 text-xs font-semibold backdrop-blur-sm tracking-wide">
-          🎯 终极唯一任务
+        <span class="px-2.5 py-0.5 rounded-full bg-yellow-400 text-slate-950 text-[11px] font-black tracking-wide shadow-xs flex items-center space-x-1">
+          <span>🌟</span>
+          <span>终极大任务：见老婆！</span>
         </span>
-        <span class="text-xs text-white/90 font-medium">目标：拥抱老婆！</span>
+        <span class="text-xs text-yellow-200 font-extrabold">¡Lo hicimos!</span>
       </div>
-      <h2 class="text-xl font-extrabold tracking-tight mb-1">顺利抵达马德里与老婆会合</h2>
-      <p class="text-sm text-orange-100 leading-snug mb-3">Hotel Meliá Castilla (马德里卡斯蒂利亚美利亚酒店)</p>
+      <h2 class="text-xl font-black tracking-tight mb-0.5">顺利抵达马德里与老婆团聚</h2>
+      <p class="text-xs text-pink-100 leading-snug mb-3">📍 Hotel Meliá Castilla (马德里卡斯蒂利亚美利亚酒店)</p>
 
-      <!-- Hotel Quick Action Buttons -->
+      <!-- Quick Action Buttons -->
       <div class="grid grid-cols-2 gap-2 pt-1">
-        <button onclick="openTaxiCardModal()" class="flex items-center justify-center space-x-1.5 bg-white text-orange-600 font-bold text-xs py-2.5 px-3 rounded-xl shadow-xs active:scale-95 transition">
+        <button onclick="openTaxiModal()" class="flex items-center justify-center space-x-1 bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-black text-xs py-2.5 px-3 rounded-2xl shadow-md active:scale-95 transition">
           <span>🚕 给出租车司机看</span>
         </button>
-        <button onclick="copyHotelAddress()" class="flex items-center justify-center space-x-1.5 bg-orange-700/60 hover:bg-orange-700/80 text-white font-medium text-xs py-2.5 px-3 rounded-xl border border-white/20 active:scale-95 transition">
+        <button onclick="copyAddress()" class="flex items-center justify-center space-x-1 bg-purple-900/60 hover:bg-purple-900/80 text-white font-bold text-xs py-2.5 px-3 rounded-2xl border border-white/30 active:scale-95 transition">
           <span id="copyIcon">📋</span>
-          <span id="copyText">一键复制西语地址</span>
+          <span id="copyText">复制西语酒店地址</span>
         </button>
       </div>
     </div>
 
-    <!-- Progress Tracking Card -->
-    <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs">
+    <!-- Map Progress Bar -->
+    <div class="bg-white rounded-2xl p-3.5 border-2 border-yellow-300 shadow-sm">
       <div class="flex justify-between items-center mb-1.5">
-        <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">通关总进度</span>
-        <span id="progressPercent" class="text-sm font-extrabold text-orange-600">0%</span>
+        <span class="text-xs font-black text-purple-900 flex items-center space-x-1">
+          <span>🗺️</span>
+          <span>探险地图进度 (I'm the Map!)</span>
+        </span>
+        <span id="progressPercent" class="text-sm font-black text-pink-600 font-mono">0%</span>
       </div>
-      <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-        <div id="progressBar" class="bg-gradient-to-r from-amber-500 to-orange-500 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+      <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-slate-200">
+        <div id="progressBar" class="bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
       </div>
-      <p id="progressStatusText" class="text-[11px] text-slate-500 mt-2 font-medium">按部就班，做完一步勾一步，绝不会走丢！</p>
+      <p id="progressStatusText" class="text-[11px] text-slate-600 mt-2 font-medium">跟着地图走，一步一步打勾，绝对不会走丢！</p>
     </div>
 
-    <!-- Stage Navigation Tabs (Horizontal Scroll) -->
-    <div class="overflow-x-auto hide-scrollbar -mx-4 px-4 flex space-x-2 py-1">
-      <button onclick="switchTab(1)" id="tab-btn-1" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-orange-500 text-white shadow-xs">
-        <span>1. 槟城出境</span>
+    <!-- 8 Tabs Bar (Horizontal Scroll) -->
+    <div class="overflow-x-auto hide-scrollbar -mx-4 px-4 flex space-x-1.5 py-1">
+      <button onclick="switchTab(1)" id="tbtn-1" class="tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition bg-pink-500 text-white shadow-xs">
+        1. 槟城出发
       </button>
-      <button onclick="switchTab(2)" id="tab-btn-2" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-white text-slate-600 border border-slate-200">
-        <span class="text-amber-500">⚠️</span>
-        <span>2. 吉隆坡取行李重办</span>
+      <button onclick="switchTab(2)" id="tbtn-2" class="tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-purple-200">
+        ⚠️ 2. KLIA 1 取行李
       </button>
-      <button onclick="switchTab(3)" id="tab-btn-3" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-white text-slate-600 border border-slate-200">
-        <span>3. 阿布扎比转机</span>
+      <button onclick="switchTab(3)" id="tbtn-3" class="tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-purple-200">
+        🍽️ 3. KLIA 1 美食
       </button>
-      <button onclick="switchTab(4)" id="tab-btn-4" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-white text-slate-600 border border-slate-200">
-        <span>4. 马德里去酒店</span>
+      <button onclick="switchTab(4)" id="tbtn-4" class="tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-purple-200">
+        🇦🇪 4. 阿布扎比转机
       </button>
-      <button onclick="switchTab(5)" id="tab-btn-5" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-white text-slate-600 border border-slate-200">
-        <span>📱 eSIM与防跑流量</span>
+      <button onclick="switchTab(5)" id="tbtn-5" class="tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-purple-200">
+        🚗 5. 马德里叫 Uber
+      </button>
+      <button onclick="switchTab(6)" id="tbtn-6" class="tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-purple-200">
+        🥱 6. 倒时差秘籍
+      </button>
+      <button onclick="switchTab(7)" id="tbtn-7" class="tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-purple-200">
+        📱 7. eSIM 防偷跑
+      </button>
+      <button onclick="switchTab(8)" id="tbtn-8" class="tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-purple-200">
+        🚨 8. 使馆紧急求助
       </button>
     </div>
 
-    <!-- ==================== STAGE 1: PENANG ==================== -->
-    <div id="tab-content-1" class="tab-panel space-y-3">
-      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+    <!-- ==================== TAB 1: PENANG ==================== -->
+    <div id="tcontent-1" class="tab-panel space-y-3">
+      <div class="bg-white rounded-3xl p-4 border-2 border-pink-200 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-pink-100 pb-2.5">
           <div class="flex items-center space-x-2">
-            <span class="p-1.5 bg-sky-50 text-sky-600 rounded-lg text-lg">🛫</span>
+            <span class="text-2xl">🛫</span>
             <div>
-              <h3 class="font-bold text-slate-900 text-sm">第一航段：槟城 ➔ 吉隆坡</h3>
-              <p class="text-xs text-slate-500 font-mono">MH1149 • 马航 Malaysia Airlines</p>
+              <h3 class="font-extrabold text-slate-900 text-sm">第一航段：Penang ➔ Kuala Lumpur</h3>
+              <p class="text-xs text-purple-700 font-bold">MH1149 • Malaysia Airlines</p>
             </div>
           </div>
-          <span class="text-xs px-2 py-1 bg-sky-100 text-sky-700 font-bold rounded-md">国内航班</span>
+          <span class="text-[10px] px-2 py-0.5 bg-pink-100 text-pink-700 font-extrabold rounded-full">Domestic</span>
         </div>
 
-        <!-- Flight Timing Box -->
-        <div class="grid grid-cols-3 gap-2 bg-slate-50 rounded-xl p-3 text-center mb-3">
+        <!-- Times -->
+        <div class="grid grid-cols-3 gap-2 bg-pink-50/60 rounded-2xl p-3 text-center border border-pink-100">
           <div>
-            <div class="text-[11px] text-slate-400">槟城起飞 (PEN)</div>
-            <div class="text-base font-extrabold text-slate-800">15:50</div>
-            <div class="text-[10px] text-slate-500">T1 航站楼</div>
+            <div class="text-[10px] text-slate-400 font-bold">Penang (PEN)</div>
+            <div class="text-base font-black text-slate-900">15:50 <span class="text-[10px] text-slate-500 font-medium">(MYT)</span></div>
+            <div class="text-[10px] text-slate-500">Terminal 1</div>
           </div>
           <div class="flex flex-col items-center justify-center">
-            <span class="text-xs text-slate-400">1小时5分</span>
-            <span class="text-slate-300">──────✈</span>
+            <span class="text-[10px] text-pink-600 font-bold">1h 05m</span>
+            <span class="text-pink-300">──────✈</span>
           </div>
           <div>
-            <div class="text-[11px] text-slate-400">抵达吉隆坡 (KUL)</div>
-            <div class="text-base font-extrabold text-slate-800">16:55</div>
-            <div class="text-[10px] text-slate-500 font-bold text-orange-600">KLIA 1</div>
+            <div class="text-[10px] text-slate-400 font-bold">Kuala Lumpur (KUL)</div>
+            <div class="text-base font-black text-slate-900">16:55 <span class="text-[10px] text-slate-500 font-medium">(MYT)</span></div>
+            <div class="text-[10px] text-purple-700 font-black">KLIA 1</div>
           </div>
         </div>
 
-        <!-- Checklist Items -->
-        <div class="space-y-2.5">
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition cursor-pointer">
-            <input type="checkbox" data-id="pen_time" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
+        <!-- Checkbox tasks -->
+        <div class="space-y-2">
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl border border-slate-200 hover:border-pink-300 transition cursor-pointer">
+            <input type="checkbox" data-id="pen_time" class="todo-check mt-0.5 w-5 h-5 rounded text-pink-500 focus:ring-pink-400 border-slate-300">
             <div class="text-xs">
-              <span class="font-bold text-slate-800 block">下午 14:00 前到达槟城机场 (PEN)</span>
-              <span class="text-slate-500 leading-relaxed">直接前往国内出发大厅（Domestic Departures），排队马航托运行李。</span>
+              <span class="font-bold text-slate-900 block">下午 14:00 (MYT) 前到达 Penang Airport</span>
+              <span class="text-slate-500">前往国内出发大厅 (Domestic Departures) 排队马航柜台。</span>
             </div>
           </label>
 
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/60 transition cursor-pointer">
-            <input type="checkbox" data-id="pen_luggage" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-amber-300">
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl bg-amber-50 border-2 border-amber-300 transition cursor-pointer">
+            <input type="checkbox" data-id="pen_luggage" class="todo-check mt-0.5 w-5 h-5 rounded text-amber-600 focus:ring-amber-500 border-amber-400">
             <div class="text-xs">
-              <span class="font-bold text-amber-900 block">⚠️ 关键提醒：行李只寄到吉隆坡 KUL！</span>
-              <span class="text-amber-700 leading-relaxed">柜台地勤只能帮你托运到 KLIA 1，绝不会直接去西班牙。拿到行李贴纸收好，准备在 KLIA 亲自拿回行李！</span>
+              <span class="font-black text-amber-950 block">⚠️ 关键：大行李只寄到吉隆坡 (KUL)！</span>
+              <span class="text-amber-800">这是非联程机票。在槟城托运时行李绝不会直飞西班牙，必须在 KLIA 1 亲自领回！</span>
             </div>
           </label>
 
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition cursor-pointer">
-            <input type="checkbox" data-id="pen_gate" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl border border-slate-200 hover:border-pink-300 transition cursor-pointer">
+            <input type="checkbox" data-id="pen_gate" class="todo-check mt-0.5 w-5 h-5 rounded text-pink-500 focus:ring-pink-400 border-slate-300">
             <div class="text-xs">
-              <span class="font-bold text-slate-800 block">过安检，找登机口 (Gate) 候机</span>
-              <span class="text-slate-500 leading-relaxed">过国内安检，按登机牌上的 Gate 候机。飞机降落 KUL 时听广播准备取行李。</span>
+              <span class="font-bold text-slate-900 block">过安检，看屏幕找登机口 (Gate) 候机</span>
+              <span class="text-slate-500">准时登机，到达吉隆坡前先深呼吸，准备第二关取行李大作战！</span>
             </div>
           </label>
         </div>
       </div>
     </div>
 
-    <!-- ==================== STAGE 2: KLIA 1 TRANSFER ==================== -->
-    <div id="tab-content-2" class="tab-panel hidden space-y-3">
-      <!-- Big Alert Warning Banner -->
-      <div class="bg-red-50 border-2 border-red-300 rounded-2xl p-3.5 shadow-xs flex items-start space-x-3">
-        <span class="text-2xl mt-0.5">🛑</span>
+    <!-- ==================== TAB 2: KLIA 1 TRANSFER ==================== -->
+    <div id="tcontent-2" class="tab-panel hidden space-y-3">
+      <!-- Big Swiper Danger Alert -->
+      <div class="bg-red-50 border-2 border-red-300 rounded-3xl p-4 shadow-sm flex items-start space-x-3">
+        <span class="text-3xl mt-0.5">🛑</span>
         <div>
-          <h4 class="text-xs font-black text-red-900 tracking-wide uppercase">下飞机第一件事：严禁跟着 Transfer 走！</h4>
+          <h4 class="text-xs font-black text-red-900 uppercase">捣蛋鬼别捣蛋！绝对不要跟 Transfer 人流！</h4>
           <p class="text-xs text-red-700 mt-1 leading-relaxed">
-            因为两段机票是分开买的，你必须像普通旅客一样**出境、拿行李大箱子**，然后再坐电梯去出发大厅重新找阿提哈德航空办理！
+            两张机票是分开买的！在 KLIA 1 你必须像普通到达旅客一样**提取行李出关**，然后坐电梯到 5 楼重新去 Etihad 柜台 Check-in！
           </p>
         </div>
       </div>
 
-      <!-- Step-by-Step Interactive Guide -->
-      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs space-y-3">
+      <div class="bg-white rounded-3xl p-4 border-2 border-purple-200 shadow-sm space-y-3">
         <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-          <h3 class="font-bold text-slate-900 text-sm">KLIA 1 自助重托运保姆级 4 步</h3>
-          <span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-medium">约 5 小时充裕时间</span>
+          <h3 class="font-black text-slate-900 text-sm">KLIA 1 自助转机保姆级 4 步</h3>
+          <span class="text-[11px] bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full font-bold">5小时充裕时间</span>
         </div>
 
-        <div class="space-y-3">
-          <!-- Step 1 -->
-          <label class="check-item flex items-start space-x-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 transition cursor-pointer">
-            <input type="checkbox" data-id="klia_baggage" class="todo-check mt-1 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs space-y-1">
-              <span class="font-bold text-slate-900 block text-sm">第一步：跟着「Baggage Claim / 提取行李」走</span>
-              <p class="text-slate-600 leading-relaxed">跟着绿色指引牌走，到达国内到达行李转盘（Carousel），等候并拿取你的大托运行李。</p>
+        <div class="space-y-2.5">
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl border border-slate-200 transition cursor-pointer">
+            <input type="checkbox" data-id="klia_baggage" class="todo-check mt-1 w-5 h-5 rounded text-purple-600 focus:ring-purple-500 border-slate-300">
+            <div class="text-xs space-y-0.5">
+              <span class="font-black text-slate-900 block text-xs">第一步：顺着「Baggage Claim」牌子走</span>
+              <p class="text-slate-600 leading-relaxed">下机后顺着绿色指示牌去国内行李转盘 (Carousel)，拿到你的大行李箱。</p>
             </div>
           </label>
 
-          <!-- Step 2 -->
-          <label class="check-item flex items-start space-x-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 transition cursor-pointer">
-            <input type="checkbox" data-id="klia_lift" class="todo-check mt-1 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs space-y-1">
-              <span class="font-bold text-slate-900 block text-sm">第二步：推行李坐电梯上 Level 5 出发大厅</span>
-              <p class="text-slate-600 leading-relaxed">拿到行李走出到达门后，找电梯或手扶梯，**直接上 5 楼（Main Departure Hall 出发大厅）**。</p>
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl border border-slate-200 transition cursor-pointer">
+            <input type="checkbox" data-id="klia_lift" class="todo-check mt-1 w-5 h-5 rounded text-purple-600 focus:ring-purple-500 border-slate-300">
+            <div class="text-xs space-y-0.5">
+              <span class="font-black text-slate-900 block text-xs">第二步：推行李坐电梯直上 Level 5 出发大厅</span>
+              <p class="text-slate-600 leading-relaxed">从 3 楼到达大厅坐电梯直接上 **5 楼（Main Departure Hall）**。</p>
             </div>
           </label>
 
-          <!-- Step 3 -->
-          <label class="check-item flex items-start space-x-3 p-3 rounded-xl border-2 border-orange-200 bg-orange-50/40 hover:border-orange-300 transition cursor-pointer">
-            <input type="checkbox" data-id="klia_checkin" class="todo-check mt-1 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-orange-300">
+          <label class="check-item flex items-start space-x-3 p-3 rounded-2xl border-2 border-pink-300 bg-pink-50/40 transition cursor-pointer">
+            <input type="checkbox" data-id="klia_checkin" class="todo-check mt-1 w-5 h-5 rounded text-pink-600 focus:ring-pink-500 border-pink-300">
             <div class="text-xs space-y-1">
-              <span class="font-bold text-orange-950 block text-sm">第三步：找到阿提哈德 (Etihad) 柜台办票</span>
-              <p class="text-slate-700 leading-relaxed">柜台大约在 **18:00 开设**（通常在 Row F 或 G）。看大屏幕找航班 **EY 487**。</p>
-              <div class="bg-white p-2.5 rounded-lg border border-orange-200 text-slate-800 space-y-1.5 mt-2">
-                <span class="font-bold text-orange-700 block">⚠️ 柜台必做两件事：</span>
+              <span class="font-black text-pink-950 block text-xs">第三步：找到阿提哈德 (Etihad) 柜台办票 (约 18:00 开)</span>
+              <p class="text-slate-700 leading-relaxed">看中央大屏幕找 **EY 487**（通常在 Aisle F 或 G）。</p>
+              <div class="bg-white p-2.5 rounded-xl border border-pink-200 text-slate-800 space-y-1 mt-1">
+                <span class="font-black text-pink-700 block">⚠️ 柜台必做两件事：</span>
                 <p>1. 必须拿到 **两张登机牌**（KUL➔AUH 和 AUH➔MAD）。</p>
-                <p>2. 对地勤说这句西语/英文确认：“<span class="font-mono bg-slate-100 px-1 py-0.5 rounded text-slate-900 font-semibold">My bags are checked straight to Madrid, right?</span>”（确认行李直达马德里！）。</p>
+                <p>2. 对地勤确认：“<span class="font-mono bg-slate-100 px-1 py-0.5 rounded font-bold">My luggage is checked straight to Madrid, right?</span>”</p>
               </div>
             </div>
           </label>
 
-          <!-- Step 4 -->
-          <label class="check-item flex items-start space-x-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 transition cursor-pointer">
-            <input type="checkbox" data-id="klia_gate" class="todo-check mt-1 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs space-y-1">
-              <span class="font-bold text-slate-900 block text-sm">第四步：出境、安检、找登机口</span>
-              <p class="text-slate-600 leading-relaxed">托运完行李后，走 **International Departures（国际出发）** 入口，护照盖章出境，第一道安检。</p>
-              <p class="text-slate-500">如果登机门是 **C 门（卫星厅 Satellite）**，乘搭接驳巴士（Shuttle Bus）或航站列车过去。21:00 前到达登机口！</p>
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl border border-slate-200 transition cursor-pointer">
+            <input type="checkbox" data-id="klia_gate" class="todo-check mt-1 w-5 h-5 rounded text-purple-600 focus:ring-purple-500 border-slate-300">
+            <div class="text-xs space-y-0.5">
+              <span class="font-black text-slate-900 block text-xs">第四步：出境、安检、找登机口</span>
+              <p class="text-slate-600 leading-relaxed">走 **International Departures** 过海关。若登机口为 **C 门（Satellite 卫星厅）**，乘搭穿梭巴士过去，21:00 前到达登机口！</p>
             </div>
           </label>
         </div>
       </div>
     </div>
 
-    <!-- ==================== STAGE 3: ABU DHABI ==================== -->
-    <div id="tab-content-3" class="tab-panel hidden space-y-3">
-      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <div class="flex items-center space-x-2">
-            <span class="p-1.5 bg-purple-50 text-purple-600 rounded-lg text-lg">🇦🇪</span>
-            <div>
-              <h3 class="font-bold text-slate-900 text-sm">阿布扎比 (AUH) 极速转机指南</h3>
-              <p class="text-xs text-slate-500 font-mono">转机时间：1小时 35分钟（抓紧走）</p>
-            </div>
-          </div>
-          <span class="text-xs px-2 py-1 bg-purple-100 text-purple-800 font-bold rounded-md">Terminal A</span>
-        </div>
-
-        <!-- Connection Flights Card -->
-        <div class="space-y-2 text-xs">
-          <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-xl">
-            <div>
-              <span class="text-slate-400 block text-[10px]">前半段</span>
-              <span class="font-bold text-slate-800">EY 487 (KUL ➔ AUH)</span>
-            </div>
-            <div class="text-right">
-              <span class="text-slate-500">21:55 起飞</span>
-              <span class="font-bold text-slate-800 block">00:50 抵达阿布扎比</span>
-            </div>
-          </div>
-          <div class="flex justify-between items-center p-2.5 bg-orange-50/60 border border-orange-100 rounded-xl">
-            <div>
-              <span class="text-orange-500 block text-[10px]">后半段（去马德里）</span>
-              <span class="font-bold text-orange-900">EY 101 (AUH ➔ MAD)</span>
-            </div>
-            <div class="text-right">
-              <span class="text-orange-600 font-bold">02:25 起飞</span>
-              <span class="text-slate-800 block font-bold">08:10 落地马德里</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- AUH Checklist -->
-        <div class="space-y-2.5 pt-1">
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl bg-emerald-50/60 border border-emerald-200/70 transition cursor-pointer">
-            <input type="checkbox" data-id="auh_baggage_safe" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-emerald-300">
-            <div class="text-xs">
-              <span class="font-bold text-emerald-950 block">✅ 这里不用拿行李！</span>
-              <span class="text-emerald-800 leading-relaxed">行李会自动由地勤搬运上下一架飞机，你只需要人过转机通道。</span>
-            </div>
-          </label>
-
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition cursor-pointer">
-            <input type="checkbox" data-id="auh_connection" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs">
-              <span class="font-bold text-slate-800 block">下机后找紫色/蓝色「Flight Connections」牌子</span>
-              <span class="text-slate-500 leading-relaxed">不要跟着人流出关（Exit），跟着 Transfer / Connections 走快速过随身安检。</span>
-            </div>
-          </label>
-
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition cursor-pointer">
-            <input type="checkbox" data-id="auh_find_gate" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs">
-              <span class="font-bold text-slate-800 block">立刻看大屏幕找 EY101 的登机口（Gate）</span>
-              <span class="text-slate-500 leading-relaxed">AUH Terminal A 很大，过了安检马上走去登机口坐下，千万不要闲逛逛到误机！</span>
-            </div>
-          </label>
-
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl bg-blue-50/50 border border-blue-200 transition cursor-pointer">
-            <input type="checkbox" data-id="auh_esim_toggle" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-blue-300">
-            <div class="text-xs">
-              <span class="font-bold text-blue-900 block">📱 切换阿联酋 UAE eSIM 上网报平安</span>
-              <span class="text-blue-700 leading-relaxed">关掉大马电话卡数据，开启阿联酋 eSIM，给老婆发个微信报平安。（点下方第 5 标签有详细图文指引）。</span>
-            </div>
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==================== STAGE 4: MADRID ARRIVAL ==================== -->
-    <div id="tab-content-4" class="tab-panel hidden space-y-3">
-      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <div class="flex items-center space-x-2">
-            <span class="p-1.5 bg-yellow-50 text-yellow-600 rounded-lg text-lg">🇪🇸</span>
-            <div>
-              <h3 class="font-bold text-slate-900 text-sm">落地马德里 (MAD) ➔ Meliá Castilla 酒店</h3>
-              <p class="text-xs text-slate-500 font-mono">08:10 AM 降落 • T4 航站楼</p>
-            </div>
-          </div>
-          <span class="text-xs px-2 py-1 bg-yellow-100 text-yellow-800 font-bold rounded-md">终点站</span>
-        </div>
-
-        <div class="space-y-2.5">
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition cursor-pointer">
-            <input type="checkbox" data-id="mad_immigration" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs">
-              <span class="font-bold text-slate-800 block">1. 入境海关检查 (Control de Pasaportes)</span>
-              <span class="text-slate-500 leading-relaxed">排队 All Passports（非欧盟）通道，准备好护照和手机里的酒店预订单备查。</span>
-            </div>
-          </label>
-
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition cursor-pointer">
-            <input type="checkbox" data-id="mad_baggage" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs">
-              <span class="font-bold text-slate-800 block">2. 取大行李 (Recogida de equipajes)</span>
-              <span class="text-slate-500 leading-relaxed">看屏幕上的 EY101 找到对应的行李转盘取箱子。走绿色通道「Nada que declarar（无申报）」出来。</span>
-            </div>
-          </label>
-
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl bg-orange-50/50 border border-orange-200 transition cursor-pointer">
-            <input type="checkbox" data-id="mad_esim" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-orange-300">
-            <div class="text-xs">
-              <span class="font-bold text-orange-950 block">3. 切换西班牙 eSIM</span>
-              <span class="text-orange-700 leading-relaxed">关掉 UAE eSIM，开启已安装的西班牙 eSIM，漫游打开，测试网络与微信。</span>
-            </div>
-          </label>
-
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition cursor-pointer">
-            <input type="checkbox" data-id="mad_taxi" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs">
-              <span class="font-bold text-slate-800 block">4. 出航站楼打出租车 / Uber / Cabify</span>
-              <span class="text-slate-500 leading-relaxed">顺着「Taxi 🚕」标志走去正规官方出租车停靠点。</span>
-            </div>
-          </label>
-        </div>
-
-        <!-- Taxi Price Tip Box -->
-        <div class="bg-slate-50 rounded-xl p-3 border border-slate-200 text-xs space-y-1.5">
-          <div class="flex items-center justify-between text-slate-900 font-bold">
-            <span>💡 马德里打车贴心提示</span>
-            <span class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.5 rounded">固定费率</span>
-          </div>
-          <p class="text-slate-600 leading-relaxed">
-            马德里官方白底带红斜杠的出租车，从机场到 M30 高速以内的市区一律**统一定价 €33 欧**，上车把下方的【司机卡片】出示给他看即可，不会被宰客！
-          </p>
-          <button onclick="openTaxiCardModal()" class="w-full mt-2 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 rounded-lg text-xs transition flex items-center justify-center space-x-1">
-            <span>🚕 点此直接全屏出示给司机看</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==================== STAGE 5: eSIM & DATA CONTROL ==================== -->
-    <div id="tab-content-5" class="tab-panel hidden space-y-3">
-      <!-- Data Bomb Warning Card -->
-      <div class="bg-rose-50 border-2 border-rose-300 rounded-2xl p-4 shadow-xs">
-        <div class="flex items-start space-x-3">
-          <span class="text-2xl mt-0.5">🚨</span>
+    <!-- ==================== TAB 3: KLIA FOOD ==================== -->
+    <div id="tcontent-3" class="tab-panel hidden space-y-3">
+      <div class="bg-white rounded-3xl p-4 border-2 border-yellow-300 shadow-sm space-y-3">
+        <div class="flex items-center space-x-2 border-b border-yellow-200 pb-2">
+          <span class="text-2xl">🍔</span>
           <div>
-            <h4 class="text-xs font-black text-rose-900 uppercase">防止短剧 / 云备份偷跑流量惨案！</h4>
-            <p class="text-xs text-rose-700 mt-1 leading-relaxed">
-              旅游 eSIM 流量有限！如果没关 iCloud 或 Google Photos 云备份，相册一自动同步几百张照片或者手机自动后台更新，**流量可能 2 小时就被吃光**！看不了 AI 短剧也没法跟老婆通视频！
-            </p>
+            <h3 class="font-black text-slate-900 text-sm">KLIA 1 充饥补给站（Backpack 能量包）</h3>
+            <p class="text-xs text-slate-500 font-medium">候机 5 小时，吃饱再上长途机！</p>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <!-- Zone 1 -->
+          <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-3 space-y-1.5">
+            <div class="flex items-center justify-between font-black text-amber-900">
+              <span>📍 办票前：Level 5 出发大厅 / 公共区</span>
+              <span class="bg-amber-200 text-amber-800 text-[10px] px-1.5 py-0.5 rounded">托运行李前</span>
+            </div>
+            <ul class="space-y-1 text-slate-700">
+              <li>• <strong>Grandmama's</strong>：地道椰浆饭 (Nasi Lemak) 与炒粿条，大马风味告别餐。</li>
+              <li>• <strong>OldTown White Coffee</strong>：白咖啡配烤面包生熟蛋，快速补充糖分。</li>
+              <li>• <strong>McDonald's</strong>：麦当劳经典快餐，赶时间首选。</li>
+            </ul>
+          </div>
+
+          <!-- Zone 2 -->
+          <div class="bg-purple-50/70 border border-purple-200 rounded-2xl p-3 space-y-1.5">
+            <div class="flex items-center justify-between font-black text-purple-900">
+              <span>📍 办票后：Satellite 卫星厅（C Gates 登机区）</span>
+              <span class="bg-purple-200 text-purple-800 text-[10px] px-1.5 py-0.5 rounded">过安检后</span>
+            </div>
+            <ul class="space-y-1 text-slate-700">
+              <li>• <strong>Din Tai Fung (鼎泰丰)</strong>：热腾腾的小笼包和汤面，暖胃首选。</li>
+              <li>• <strong>Boost Juice Bars</strong>：果昔与鲜榨果汁，长途飞行前补充维生素。</li>
+              <li>• <strong>Starbucks</strong>：买瓶瓶装水上机，随身带好水壶。</li>
+            </ul>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Settings Checklist -->
-      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs space-y-3">
-        <h3 class="font-bold text-slate-900 text-sm border-b border-slate-100 pb-2">📱 手机防跑流量 3 个必做设置</h3>
-
-        <div class="space-y-2.5">
-          <!-- Item 1 -->
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200 transition cursor-pointer">
-            <input type="checkbox" data-id="esim_icloud" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs">
-              <span class="font-bold text-slate-900 block">1. 关掉 iCloud 相册「蜂窝网络数据」</span>
-              <span class="text-slate-600 leading-relaxed block mt-0.5">
-                前往手机【设置】➔【照片/Photos】➔【蜂窝网络数据/Cellular Data】➔ **关闭**！确保照片只在有 Wi-Fi 时备份。
-              </span>
+    <!-- ==================== TAB 4: ABU DHABI ==================== -->
+    <div id="tcontent-4" class="tab-panel hidden space-y-3">
+      <div class="bg-white rounded-3xl p-4 border-2 border-purple-200 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-purple-100 pb-2.5">
+          <div class="flex items-center space-x-2">
+            <span class="text-2xl">🇦🇪</span>
+            <div>
+              <h3 class="font-black text-slate-900 text-sm">Abu Dhabi (AUH) 极速转机</h3>
+              <p class="text-xs text-purple-700 font-bold">Terminal A • 转机时间 1h 35m</p>
             </div>
-          </label>
-
-          <!-- Item 2 -->
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200 transition cursor-pointer">
-            <input type="checkbox" data-id="esim_appstore" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-slate-300">
-            <div class="text-xs">
-              <span class="font-bold text-slate-900 block">2. 关闭 App 自动更新与短视频后台刷新</span>
-              <span class="text-slate-600 leading-relaxed block mt-0.5">
-                前往【设置】➔【App Store】➔ 关掉【自动下载】与【蜂窝网络下载】。短剧在机场或者酒店 Wi-Fi 下再看！
-              </span>
-            </div>
-          </label>
-
-          <!-- Item 3 -->
-          <label class="check-item flex items-start space-x-3 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 transition cursor-pointer">
-            <input type="checkbox" data-id="esim_hotel_wifi" class="todo-check mt-0.5 w-5 h-5 rounded text-orange-500 focus:ring-orange-400 border-emerald-300">
-            <div class="text-xs">
-              <span class="font-bold text-emerald-950 block">3. 进酒店第一件事：连上 Meliá 免费 Wi-Fi 自动备份</span>
-              <span class="text-emerald-800 leading-relaxed block mt-0.5">
-                到酒店房间立刻连 Wi-Fi 并充电，手机会自动在夜间完成全套云备份。万一手机在西班牙有闪失，所有照片和资料依然安然无恙！
-              </span>
-            </div>
-          </label>
+          </div>
+          <span class="text-[10px] px-2 py-0.5 bg-purple-100 text-purple-800 font-extrabold rounded-full">中转</span>
         </div>
-      </div>
-
-      <!-- eSIM Switch Guide Accordion -->
-      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs space-y-3">
-        <h3 class="font-bold text-slate-900 text-sm">🌍 两国 eSIM 正确切换流程</h3>
 
         <div class="space-y-2 text-xs">
-          <div class="p-3 bg-amber-50/70 border border-amber-200 rounded-xl space-y-1">
-            <div class="font-bold text-amber-900 flex items-center justify-between">
-              <span>🇦🇪 在阿布扎比 (AUH) 落地时：</span>
-              <span class="text-[10px] bg-amber-200/80 px-1.5 py-0.5 rounded">中转启用</span>
+          <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-2xl">
+            <div>
+              <span class="text-slate-400 block text-[10px]">前半段已完成</span>
+              <span class="font-black text-slate-800">EY 487 (KUL ➔ AUH)</span>
             </div>
-            <p class="text-amber-800 leading-relaxed">
-              1. 手机【设置】➔【蜂窝网络 / 移动数据】<br>
-              2. 关掉马来西亚主卡的数据漫游。<br>
-              3. 打开已经安装好的 **UAE 阿联酋 eSIM**，将「蜂窝数据」指定为该卡，开启「数据漫游」。
+            <div class="text-right">
+              <span class="text-slate-500">21:55 (MYT) 起飞</span>
+              <span class="font-black text-slate-800 block">00:50 (GST) 抵达</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center p-2.5 bg-pink-50 border border-pink-200 rounded-2xl">
+            <div>
+              <span class="text-pink-600 block text-[10px] font-bold">后半段（奔向马德里）</span>
+              <span class="font-black text-pink-900">EY 101 (AUH ➔ MAD)</span>
+            </div>
+            <div class="text-right">
+              <span class="text-pink-600 font-bold">02:25 (GST) 起飞</span>
+              <span class="text-slate-900 block font-black">08:10 (CEST) 落地</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-1">
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl bg-emerald-50 border border-emerald-200 transition cursor-pointer">
+            <input type="checkbox" data-id="auh_bag" class="todo-check mt-0.5 w-5 h-5 rounded text-emerald-600 focus:ring-emerald-500 border-emerald-300">
+            <div class="text-xs">
+              <span class="font-black text-emerald-950 block">✅ 这里不用拿行李！</span>
+              <span class="text-emerald-800">行李地勤会自动转运到下一架飞机。</span>
+            </div>
+          </label>
+
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl border border-slate-200 transition cursor-pointer">
+            <input type="checkbox" data-id="auh_transfer" class="todo-check mt-0.5 w-5 h-5 rounded text-purple-600 focus:ring-purple-500 border-slate-300">
+            <div class="text-xs">
+              <span class="font-bold text-slate-900 block">跟着「Flight Connections」紫色指示牌走</span>
+              <span class="text-slate-500">快速过随身安检，不要走去入境出海关通道。</span>
+            </div>
+          </label>
+
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl border border-slate-200 transition cursor-pointer">
+            <input type="checkbox" data-id="auh_gate" class="todo-check mt-0.5 w-5 h-5 rounded text-purple-600 focus:ring-purple-500 border-slate-300">
+            <div class="text-xs">
+              <span class="font-bold text-slate-900 block">看大屏幕找 EY101 登机口直奔过去</span>
+              <span class="text-slate-500">Terminal A 很大，过了安检直接走去登机口坐下，切勿闲逛！</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: MADRID UBER & TAXI ==================== -->
+    <div id="tcontent-5" class="tab-panel hidden space-y-3">
+      <div class="bg-white rounded-3xl p-4 border-2 border-yellow-300 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-yellow-200 pb-2.5">
+          <div class="flex items-center space-x-2">
+            <span class="text-2xl">🚗</span>
+            <div>
+              <h3 class="font-black text-slate-900 text-sm">落地 Madrid (MAD) ➔ 酒店叫车</h3>
+              <p class="text-xs text-yellow-700 font-bold">08:10 (CEST) 落地 • T4 航站楼</p>
+            </div>
+          </div>
+          <span class="text-[10px] px-2 py-0.5 bg-yellow-100 text-yellow-900 font-extrabold rounded-full">终点站</span>
+        </div>
+
+        <div class="space-y-2">
+          <!-- Step 1 APM -->
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl border border-slate-200 transition cursor-pointer">
+            <input type="checkbox" data-id="mad_apm" class="todo-check mt-0.5 w-5 h-5 rounded text-pink-500 focus:ring-pink-400 border-slate-300">
+            <div class="text-xs">
+              <span class="font-bold text-slate-900 block">1. 坐地下 APM 小火车到 T4 主楼</span>
+              <span class="text-slate-500">国际航班通常停在 T4S (卫星厅)。跟着人流坐免费地下无人驾驶小火车去 T4 主楼。</span>
+            </div>
+          </label>
+
+          <!-- Step 2 Immigration & Baggage -->
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl border border-slate-200 transition cursor-pointer">
+            <input type="checkbox" data-id="mad_customs" class="todo-check mt-0.5 w-5 h-5 rounded text-pink-500 focus:ring-pink-400 border-slate-300">
+            <div class="text-xs">
+              <span class="font-bold text-slate-900 block">2. 护照盖章出境 ➔ 提取大行李</span>
+              <span class="text-slate-500">排 All Passports 过非欧盟海关，看大屏幕在转盘拿行李，走「Nada que declarar」绿色出口。</span>
+            </div>
+          </label>
+
+          <!-- Step 3 Uber Location -->
+          <div class="p-3 bg-amber-50 rounded-2xl border-2 border-amber-300 text-xs space-y-1.5">
+            <span class="font-black text-amber-950 block text-xs">📍 叫 Uber 候车点位置（千万别站错层！）：</span>
+            <p class="text-amber-800 leading-relaxed font-bold">
+              走出到达大厅后，顺着「Parking P4」指示牌走人行连廊进入立体停车场：<br>
+              👉 乘电梯上到 **Planta 4 (4楼)**，前往 **Módulo D (D区)** 的 VTC / Uber 专属上客区！
             </p>
           </div>
 
-          <div class="p-3 bg-blue-50/70 border border-blue-200 rounded-xl space-y-1">
-            <div class="font-bold text-blue-900 flex items-center justify-between">
-              <span>🇪🇸 在马德里 (MAD) 落地时：</span>
-              <span class="text-[10px] bg-blue-200/80 px-1.5 py-0.5 rounded">西班牙启用</span>
+          <!-- Step 4 Taxi Alternative -->
+          <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-xs space-y-2">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+              <span>🚕 备选：官方出租车 (Taxi)</span>
+              <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded text-[10px]">统一定价 €33</span>
             </div>
-            <p class="text-blue-800 leading-relaxed">
-              1. 关掉刚刚用过的 UAE 阿联酋 eSIM。<br>
-              2. 打开已经安装好的 **Spain 西班牙 eSIM**。<br>
-              3. 将「蜂窝数据」主线路指定为西班牙卡，开启「数据漫游」。稍等 1-2 分钟即可上网！
+            <p class="text-slate-600 leading-relaxed">
+              如果不想找停车场叫 Uber，直接顺着黄色「Taxi」标志走出 0 楼地面排队乘车，官方统一价 <strong>€33 欧元</strong>，直接把卡片递给司机：
             </p>
+            <button onclick="openTaxiModal()" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 rounded-xl text-xs transition">
+              🚕 点此直接全屏出示给司机看
+            </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Essential Emergency & Spanish Card -->
-    <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs space-y-3">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-        <span class="text-xs font-bold text-slate-800">🗣️ 救命西班牙语常用卡（指给老外看）</span>
-        <span class="text-[10px] text-slate-400">点击发音/放大</span>
-      </div>
+    <!-- ==================== TAB 6: JET LAG ==================== -->
+    <div id="tcontent-6" class="tab-panel hidden space-y-3">
+      <div class="bg-white rounded-3xl p-4 border-2 border-blue-200 shadow-sm space-y-3">
+        <div class="flex items-center space-x-2 border-b border-blue-100 pb-2">
+          <span class="text-2xl">🥱</span>
+          <div>
+            <h3 class="font-black text-slate-900 text-sm">倒时差终极秘籍（精神见老婆）</h3>
+            <p class="text-xs text-blue-600 font-bold">马来西亚 (MYT) 比 西班牙 (CEST) 快 6 小时</p>
+          </div>
+        </div>
 
-      <div class="grid grid-cols-2 gap-2 text-xs">
-        <div onclick="showPhraseModal('¿Dónde está la salida?', '请问出口在哪里？', 'Dong-de es-ta la sa-li-da?')" class="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 cursor-pointer transition active:scale-95">
-          <div class="font-bold text-slate-900">出口在哪里？</div>
-          <div class="text-[11px] text-slate-500 italic mt-0.5">¿Dónde está la salida?</div>
-        </div>
-        <div onclick="showPhraseModal('¿Dónde recojo el equipaje?', '请问行李提取处在哪里？', 'Dong-de re-co-ho el e-ki-pa-he?')" class="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 cursor-pointer transition active:scale-95">
-          <div class="font-bold text-slate-900">哪里拿行李？</div>
-          <div class="text-[11px] text-slate-500 italic mt-0.5">¿Dónde el equipaje?</div>
-        </div>
-        <div onclick="showPhraseModal('¿Dónde está la parada de taxis?', '请问出租车停靠点在哪里？', 'Dong-de es-ta la pa-ra-da de tak-sis?')" class="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 cursor-pointer transition active:scale-95">
-          <div class="font-bold text-slate-900">出租车站台在哪？</div>
-          <div class="text-[11px] text-slate-500 italic mt-0.5">¿Parada de taxis?</div>
-        </div>
-        <div onclick="showPhraseModal('No hablo español, solo inglés.', '我不会西语，可以说英语吗？', 'No ab-lo es-pa-nyol')" class="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 cursor-pointer transition active:scale-95">
-          <div class="font-bold text-slate-900">我不会说西班牙语</div>
-          <div class="text-[11px] text-slate-500 italic mt-0.5">No hablo español</div>
+        <div class="space-y-2 text-xs">
+          <div class="p-3 bg-blue-50/70 border border-blue-200 rounded-2xl space-y-1">
+            <span class="font-black text-blue-900 block">✈️ 第一段飞行 (KUL ➔ AUH)：</span>
+            <p class="text-slate-700">起飞后吃完机上餐就戴上眼罩入睡（相当于大马午夜），补足第一波精力。</p>
+          </div>
+
+          <div class="p-3 bg-purple-50/70 border border-purple-200 rounded-2xl space-y-1">
+            <span class="font-black text-purple-900 block">✈️ 第二段飞行 (AUH ➔ MAD)：</span>
+            <p class="text-slate-700">02:25 起飞后继续小睡 4 小时，降落前 1 小时醒来洗脸，喝一杯黑咖啡唤醒大脑。</p>
+          </div>
+
+          <div class="p-3 bg-yellow-50/70 border border-yellow-200 rounded-2xl space-y-1">
+            <span class="font-black text-yellow-950 block">☀️ 落地马德里早晨 08:10 (CEST)：</span>
+            <p class="text-slate-700">落地正是欧洲早晨！多晒户外阳光，白天千万不要睡大觉！喝杯咖啡撑到晚上 21:00 再睡，时差一次性倒好！</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Quick Emergency Dial Card -->
-    <div class="bg-slate-900 text-white rounded-2xl p-4 shadow-sm flex items-center justify-between">
-      <div>
-        <div class="text-[11px] text-slate-400">欧洲通用紧急求助电话</div>
-        <div class="text-xl font-mono font-black text-amber-400 tracking-wider">112 (免费直拨)</div>
+    <!-- ==================== TAB 7: eSIM & DATA ==================== -->
+    <div id="tcontent-7" class="tab-panel hidden space-y-3">
+      <!-- Swiper Data Warning -->
+      <div class="bg-rose-50 border-2 border-rose-300 rounded-3xl p-4 shadow-sm flex items-start space-x-3">
+        <span class="text-3xl mt-0.5">🦊</span>
+        <div>
+          <h4 class="text-xs font-black text-rose-900 uppercase">捣蛋鬼别偷跑流量！防爆雷指南</h4>
+          <p class="text-xs text-rose-700 mt-1 leading-relaxed">
+            旅游 eSIM 流量有限！万一相册云备份偷偷上传，或者后台自动更新 App，流量可能 2 小时就被吃光！看不了短剧也没法跟老婆通视频！
+          </p>
+        </div>
       </div>
-      <a href="tel:112" class="bg-amber-400 hover:bg-amber-500 text-slate-950 px-4 py-2 rounded-xl text-xs font-extrabold flex items-center space-x-1 transition active:scale-95">
-        <span>📞 紧急呼叫</span>
-      </a>
+
+      <div class="bg-white rounded-3xl p-4 border-2 border-purple-200 shadow-sm space-y-3">
+        <h3 class="font-black text-slate-900 text-sm border-b border-slate-100 pb-2">📱 手机防偷跑 3 个必做开关</h3>
+
+        <div class="space-y-2 text-xs">
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl bg-slate-50 border border-slate-200 transition cursor-pointer">
+            <input type="checkbox" data-id="esim_cloud" class="todo-check mt-0.5 w-5 h-5 rounded text-pink-500 focus:ring-pink-400 border-slate-300">
+            <div>
+              <span class="font-black text-slate-900 block">1. 关掉相册「蜂窝数据」同步</span>
+              <span class="text-slate-600 block mt-0.5">前往【设置】➔【照片/Photos】➔ 关掉【蜂窝网络数据】。照片只在 Wi-Fi 时备份！</span>
+            </div>
+          </label>
+
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl bg-slate-50 border border-slate-200 transition cursor-pointer">
+            <input type="checkbox" data-id="esim_app" class="todo-check mt-0.5 w-5 h-5 rounded text-pink-500 focus:ring-pink-400 border-slate-300">
+            <div>
+              <span class="font-black text-slate-900 block">2. 关闭 App 自动更新与短视频后台刷新</span>
+              <span class="text-slate-600 block mt-0.5">【设置】➔【App Store】➔ 关掉【自动下载】。AI 短剧在酒店 Wi-Fi 下再畅看！</span>
+            </div>
+          </label>
+
+          <label class="check-item flex items-start space-x-3 p-2.5 rounded-2xl bg-emerald-50 border border-emerald-200 transition cursor-pointer">
+            <input type="checkbox" data-id="esim_wifi" class="todo-check mt-0.5 w-5 h-5 rounded text-emerald-600 focus:ring-emerald-500 border-emerald-300">
+            <div>
+              <span class="font-black text-emerald-950 block">3. 进酒店立刻连 Wi-Fi 进行夜间自动备份</span>
+              <span class="text-emerald-800 block mt-0.5">连上 Meliá 酒店免费 Wi-Fi 并充电，所有照片资料安然保存在云端。</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 8: EMBASSY ==================== -->
+    <div id="tcontent-8" class="tab-panel hidden space-y-3">
+      <div class="bg-white rounded-3xl p-4 border-2 border-red-200 shadow-sm space-y-3">
+        <div class="flex items-center space-x-2 border-b border-red-100 pb-2">
+          <span class="text-2xl">🚨</span>
+          <div>
+            <h3 class="font-black text-slate-900 text-sm">马来西亚驻西班牙使馆 (Embassy)</h3>
+            <p class="text-xs text-red-600 font-bold">万一遗失护照或遇紧急突发状况</p>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <!-- Madrid -->
+          <div class="p-3 bg-red-50/60 rounded-2xl border border-red-200 space-y-1.5">
+            <div class="flex items-center justify-between font-black text-red-950">
+              <span>🇲🇾 马德里大使馆 (Embassy in Madrid)</span>
+              <span class="bg-red-200 text-red-900 text-[10px] px-1.5 py-0.2 rounded font-bold">首都</span>
+            </div>
+            <p class="text-slate-700">📍 地址：Avenida de los Madroños 63 bis, 28043 Madrid</p>
+            <p class="text-slate-700">📞 总机：<a href="tel:+34915550684" class="text-red-700 font-mono font-bold underline">+34 91 555 0684</a></p>
+            <p class="text-slate-700">🚨 24h 值班紧急热线：<a href="tel:+34659894943" class="text-red-700 font-mono font-bold underline">+34 659 89 49 43</a></p>
+            <a href="https://maps.google.com/?q=Embassy+of+Malaysia+Madrid" target="_blank" class="block w-full text-center bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-xl transition mt-1">
+              🗺️ 点击一键导航到马德里大使馆
+            </a>
+          </div>
+
+          <!-- Barcelona -->
+          <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-1.5">
+            <div class="flex items-center justify-between font-black text-slate-900">
+              <span>🇲🇾 巴塞罗那名誉领事馆 (Consulate in Barcelona)</span>
+              <span class="bg-slate-200 text-slate-800 text-[10px] px-1.5 py-0.2 rounded">名誉领馆</span>
+            </div>
+            <p class="text-slate-700">📍 地址：Calle Munner 8, 08022 Barcelona</p>
+            <p class="text-slate-700">📞 电话：<a href="tel:+34934170911" class="text-blue-700 font-mono font-bold underline">+34 93 417 09 11</a></p>
+            <a href="https://maps.google.com/?q=Consulado+de+Malasia+Barcelona" target="_blank" class="block w-full text-center bg-slate-800 hover:bg-black text-white font-bold py-2 rounded-xl transition mt-1">
+              🗺️ 点击一键导航到巴塞罗那领事馆
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
 
   </main>
 
-  <!-- ==================== MODAL 1: TAXI DRIVER CARD ==================== -->
+  <!-- ==================== ADAPTIVE STICKY BOTTOM BAR ==================== -->
+  <div id="bottomEmergencyBar" class="fixed bottom-0 left-0 right-0 z-40 bg-slate-950/90 backdrop-blur-md border-t-2 border-yellow-400 p-3 shadow-lg">
+    <div class="max-w-md mx-auto flex items-center justify-between">
+      <div id="footerInfo">
+        <!-- Injected via JavaScript based on Active Tab -->
+      </div>
+      <div id="footerAction">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: TAXI DRIVER CARD ==================== -->
   <div id="taxiModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl relative text-center space-y-4">
-      <button onclick="closeTaxiCardModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition">
-        ✕
-      </button>
-
-      <div class="inline-block p-3 bg-amber-100 text-amber-600 rounded-2xl text-2xl">
-        🚕
-      </div>
-
+      <button onclick="closeTaxiModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition">✕</button>
+      <div class="inline-block p-3 bg-yellow-100 text-yellow-600 rounded-2xl text-2xl">🚕</div>
       <div class="space-y-1">
-        <span class="text-xs uppercase tracking-wider font-extrabold text-orange-600">Por favor, lléveme a:</span>
+        <span class="text-xs uppercase tracking-wider font-extrabold text-pink-600">Por favor, lléveme a:</span>
         <h3 class="text-2xl font-black text-slate-900 leading-tight">Hotel Meliá Castilla</h3>
       </div>
-
-      <!-- Large Spanish Address for Driver -->
       <div class="bg-slate-50 p-4 rounded-2xl border-2 border-slate-200 text-left">
         <p class="text-xs text-slate-400 font-semibold uppercase">Dirección (西语地址):</p>
-        <p class="text-base font-bold text-slate-900 mt-1 leading-snug">
-          Calle del Poeta Joan Maragall, 43, Tetuán, 28020 Madrid, España
-        </p>
+        <p class="text-base font-bold text-slate-900 mt-1 leading-snug">Calle del Poeta Joan Maragall, 43, Tetuán, 28020 Madrid, España</p>
       </div>
-
-      <div class="bg-emerald-50 text-emerald-800 p-2.5 rounded-xl text-xs font-medium">
-        💶 机场到市中心酒店官方统一标准价：<strong>€33 欧元</strong>
+      <div class="bg-emerald-50 text-emerald-800 p-2.5 rounded-xl text-xs font-bold">
+        💶 机场到市区酒店官方统一定价：€33 欧元
       </div>
-
-      <div class="pt-2 flex flex-col space-y-2">
-        <a href="https://maps.google.com/?q=Hotel+Melia+Castilla+Madrid" target="_blank" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl text-xs transition flex items-center justify-center space-x-1.5 shadow-sm">
-          <span>🗺️ 在 Google Maps 打开导航</span>
+      <div class="pt-1 flex flex-col space-y-2">
+        <a href="https://maps.google.com/?q=Hotel+Melia+Castilla+Madrid" target="_blank" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl text-xs transition flex items-center justify-center space-x-1">
+          <span>🗺️ Google Maps 导航</span>
         </a>
-        <button onclick="closeTaxiCardModal()" class="w-full bg-slate-100 text-slate-600 font-semibold py-2.5 rounded-xl text-xs">
-          收起卡片
-        </button>
+        <button onclick="closeTaxiModal()" class="w-full bg-slate-100 text-slate-600 font-semibold py-2.5 rounded-xl text-xs">收起卡片</button>
       </div>
     </div>
   </div>
 
-  <!-- ==================== MODAL 2: SPANISH PHRASE DIALOG ==================== -->
-  <div id="phraseModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl relative text-center space-y-4">
-      <button onclick="closePhraseModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition">
-        ✕
-      </button>
-
-      <span class="text-xs uppercase font-extrabold text-orange-600 tracking-wider">直接拿给工作人员看</span>
-
-      <div class="bg-orange-50/80 border-2 border-orange-200 rounded-2xl p-5">
-        <p id="phraseSpanish" class="text-2xl font-black text-slate-900 leading-snug"></p>
-        <p id="phrasePinyin" class="text-xs text-slate-400 mt-2 font-mono italic"></p>
-      </div>
-
-      <p id="phraseChinese" class="text-sm font-bold text-slate-700"></p>
-
-      <button onclick="closePhraseModal()" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs">
-        明白了
-      </button>
-    </div>
-  </div>
-
+  <!-- ==================== JS LOGIC ==================== -->
   <script>
-    // LocalStorage Key for Checkbox State
-    const STORAGE_KEY = 'madrid_travel_check_state_v1';
-
-    // State object
+    const STORAGE_KEY = 'dora_spain_adventure_state_v1';
     let savedState = {};
 
     try {
@@ -598,34 +598,31 @@
       savedState = {};
     }
 
-    // Initialize checkboxes on DOM loaded
     document.addEventListener('DOMContentLoaded', () => {
       const checkboxes = document.querySelectorAll('.todo-check');
-      
       checkboxes.forEach(cb => {
         const id = cb.getAttribute('data-id');
         if (savedState[id]) {
           cb.checked = true;
-          markParentItem(cb, true);
+          markParent(cb, true);
         }
-
         cb.addEventListener('change', (e) => {
           savedState[id] = e.target.checked;
           localStorage.setItem(STORAGE_KEY, JSON.stringify(savedState));
-          markParentItem(cb, e.target.checked);
+          markParent(cb, e.target.checked);
           updateProgress();
         });
       });
 
       updateProgress();
+      switchTab(1); // Default to Tab 1
 
-      // Reset button logic
       document.getElementById('resetBtn').addEventListener('click', () => {
-        if (window.confirm("确定要重新开始重置所有勾选吗？")) {
+        if (confirm("确定要重新开始探险并重置所有进度吗？")) {
           localStorage.removeItem(STORAGE_KEY);
           checkboxes.forEach(cb => {
             cb.checked = false;
-            markParentItem(cb, false);
+            markParent(cb, false);
           });
           savedState = {};
           updateProgress();
@@ -633,126 +630,112 @@
       });
     });
 
-    // Mark parent styling
-    function markParentItem(checkbox, isChecked) {
-      const label = checkbox.closest('.check-item');
-      if (label) {
+    function markParent(cb, isChecked) {
+      const parent = cb.closest('.check-item');
+      if (parent) {
         if (isChecked) {
-          label.classList.add('opacity-60', 'line-through');
+          parent.classList.add('opacity-60', 'line-through');
         } else {
-          label.classList.remove('opacity-60', 'line-through');
+          parent.classList.remove('opacity-60', 'line-through');
         }
       }
     }
 
-    // Calculate & render progress
     function updateProgress() {
-      const allCheckboxes = document.querySelectorAll('.todo-check');
-      const total = allCheckboxes.length;
-      let checkedCount = 0;
-
-      allCheckboxes.forEach(cb => {
-        if (cb.checked) checkedCount++;
-      });
-
-      const percent = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+      const checkboxes = document.querySelectorAll('.todo-check');
+      const total = checkboxes.length;
+      let checked = 0;
+      checkboxes.forEach(cb => { if (cb.checked) checked++; });
+      const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
       
-      const progressBar = document.getElementById('progressBar');
-      const progressPercent = document.getElementById('progressPercent');
-      const progressStatus = document.getElementById('progressStatusText');
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressPercent').innerText = pct + '%';
 
-      if (progressBar) progressBar.style.width = percent + '%';
-      if (progressPercent) progressPercent.innerText = percent + '%';
-
-      if (progressStatus) {
-        if (percent === 0) {
-          progressStatus.innerText = '准备出发！按部就班，一步一步勾选即可。';
-        } else if (percent < 50) {
-          progressStatus.innerText = '顺利通关中！特别留意吉隆坡 1 号航站楼自己拿行李。';
-        } else if (percent < 90) {
-          progressStatus.innerText = '马上就要落地马德里了，准备见老婆！';
-        } else {
-          progressStatus.innerText = '🎉 恭喜达成终极任务！平安抵达酒店与老婆团聚！❤️';
-        }
-      }
+      const status = document.getElementById('progressStatusText');
+      if (pct === 0) status.innerText = '探险即将启程！跟着地图走，一步一步打勾！';
+      else if (pct < 50) status.innerText = '正在通关中！特别留意 KLIA 1 自己拿大行李！';
+      else if (pct < 90) status.innerText = '马上就要抵达马德里了，准备见老婆！';
+      else status.innerText = '🎉 ¡Lo hicimos! We did it! 恭喜顺利抱到老婆！❤️';
     }
 
-    // Tab Switcher
+    // Tab Switcher with Adaptive Bottom Emergency Bar
     function switchTab(index) {
-      // Toggle panels
-      for (let i = 1; i <= 5; i++) {
-        const panel = document.getElementById('tab-content-' + i);
-        const btn = document.getElementById('tab-btn-' + i);
-        
-        if (panel) {
+      for (let i = 1; i <= 8; i++) {
+        const p = document.getElementById('tcontent-' + i);
+        const b = document.getElementById('tbtn-' + i);
+        if (p) p.classList.toggle('hidden', i !== index);
+        if (b) {
           if (i === index) {
-            panel.classList.remove('hidden');
+            b.className = 'tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-black transition bg-pink-500 text-white shadow-xs';
           } else {
-            panel.classList.add('hidden');
-          }
-        }
-
-        if (btn) {
-          if (i === index) {
-            btn.className = 'tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-orange-500 text-white shadow-xs';
-          } else {
-            btn.className = 'tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-white text-slate-600 border border-slate-200';
+            b.className = 'tab-btn shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-purple-200';
           }
         }
       }
-    }
 
-    // Taxi Card Modal
-    function openTaxiCardModal() {
-      const modal = document.getElementById('taxiModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
+      // Update Adaptive Emergency Footer
+      const fInfo = document.getElementById('footerInfo');
+      const fAction = document.getElementById('footerAction');
 
-    function closeTaxiCardModal() {
-      const modal = document.getElementById('taxiModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    // Phrase Modal
-    function showPhraseModal(spanish, chinese, pinyin) {
-      document.getElementById('phraseSpanish').innerText = spanish;
-      document.getElementById('phraseChinese').innerText = chinese;
-      document.getElementById('phrasePinyin').innerText = pinyin || '';
-      const modal = document.getElementById('phraseModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closePhraseModal() {
-      const modal = document.getElementById('phraseModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    // Copy Hotel Address
-    function copyHotelAddress() {
-      const textToCopy = "Hotel Meliá Castilla, Calle del Poeta Joan Maragall, 43, Tetuán, 28020 Madrid, España";
-      
-      const dummy = document.createElement("textarea");
-      document.body.appendChild(dummy);
-      dummy.value = textToCopy;
-      dummy.select();
-      try {
-        document.execCommand("copy");
-        const copyText = document.getElementById('copyText');
-        const copyIcon = document.getElementById('copyIcon');
-        copyText.innerText = '已复制！随时粘贴';
-        copyIcon.innerText = '✅';
-        setTimeout(() => {
-          copyText.innerText = '一键复制西语地址';
-          copyIcon.innerText = '📋';
-        }, 2500);
-      } catch (err) {
-        console.error('Copy failed', err);
+      if (index <= 3) {
+        // Malaysia Context
+        fInfo.innerHTML = `
+          <div class="text-[10px] text-yellow-300 font-bold">🇲🇾 马来西亚境内紧急求助</div>
+          <div class="text-sm font-mono font-black text-white">999 (警方/救护车)</div>
+        `;
+        fAction.innerHTML = `
+          <a href="tel:999" class="bg-red-600 hover:bg-red-700 text-white font-black text-xs px-3.5 py-1.5 rounded-xl transition">📞 直拨 999</a>
+        `;
+      } else if (index === 4) {
+        // UAE Context
+        fInfo.innerHTML = `
+          <div class="text-[10px] text-yellow-300 font-bold">🇦🇪 阿联酋 AUH 紧急求助</div>
+          <div class="text-sm font-mono font-black text-white">999 (警察) / 998 (救护)</div>
+        `;
+        fAction.innerHTML = `
+          <a href="tel:999" class="bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-xl transition">📞 直拨 999</a>
+        `;
+      } else {
+        // Spain / Europe Context
+        fInfo.innerHTML = `
+          <div class="text-[10px] text-yellow-300 font-bold">🇪🇸 欧洲/西班牙紧急呼叫</div>
+          <div class="text-sm font-mono font-black text-white">112 (全欧统一直拨)</div>
+        `;
+        fAction.innerHTML = `
+          <a href="tel:112" class="bg-pink-600 hover:bg-pink-700 text-white font-black text-xs px-3.5 py-1.5 rounded-xl transition">📞 直拨 112</a>
+        `;
       }
-      document.body.removeChild(dummy);
+    }
+
+    function openTaxiModal() {
+      const m = document.getElementById('taxiModal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function closeTaxiModal() {
+      const m = document.getElementById('taxiModal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function copyAddress() {
+      const text = "Hotel Meliá Castilla, Calle del Poeta Joan Maragall, 43, Tetuán, 28020 Madrid, España";
+      const el = document.createElement("textarea");
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+
+      const t = document.getElementById('copyText');
+      const i = document.getElementById('copyIcon');
+      t.innerText = '已复制！随时粘贴';
+      i.innerText = '✅';
+      setTimeout(() => {
+        t.innerText = '复制西语酒店地址';
+        i.innerText = '📋';
+      }, 2500);
     }
   </script>
 </body>
